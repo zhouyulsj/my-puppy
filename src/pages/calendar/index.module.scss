@@ -1,0 +1,243 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: $color-bg-page;
+  display: flex;
+  flex-direction: column;
+}
+
+.notice {
+  padding: 12rpx $spacing-lg;
+  background: $color-bg-warm;
+  text-align: center;
+}
+
+.noticeText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.scrollContent {
+  padding: $spacing-md $spacing-lg 48rpx;
+}
+
+// 统计栏
+.stats {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.statsRow {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16rpx;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statNum {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  line-height: 1.2;
+}
+
+.statLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.statNumDone { color: $color-success; }
+.statNumHigh { color: $color-risk-high; }
+
+.progressBar {
+  height: 12rpx;
+  background: $color-divider;
+  border-radius: $radius-round;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-round;
+  transition: width 0.4s ease;
+}
+
+// 时间轴
+.timeline {
+  position: relative;
+  padding-left: 48rpx;
+}
+
+.timelineLine {
+  position: absolute;
+  left: 20rpx;
+  top: 0;
+  bottom: 0;
+  width: 4rpx;
+  background: $color-border;
+}
+
+.monthGroup {
+  margin-bottom: $spacing-lg;
+  animation: fadeInUp 0.4s ease backwards;
+}
+
+.monthHeader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-sm;
+}
+
+.monthDot {
+  position: absolute;
+  left: -36rpx;
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: $radius-round;
+  background: $color-primary;
+  border: 4rpx solid $color-bg-page;
+  box-sizing: border-box;
+}
+
+.monthTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+// 事件卡片
+.eventCard {
+  position: relative;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  padding-left: 28rpx;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease backwards;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8rpx;
+  }
+
+  &.vaccine::before { background: $color-cat-vaccine; }
+  &.deworming::before { background: $color-cat-deworming; }
+  &.grooming::before { background: $color-cat-grooming; }
+  &.checkup::before { background: $color-cat-checkup; }
+  &.neutering::before { background: $color-cat-neutering; }
+  &.special::before { background: $color-cat-special; }
+
+  &.done {
+    opacity: 0.5;
+  }
+}
+
+.eventHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.eventTitleWrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.eventTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+
+  &.done {
+    text-decoration: line-through;
+    color: $color-text-tertiary;
+  }
+}
+
+.importanceMark {
+  font-size: $font-size-sm;
+}
+
+.eventCheck {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid $color-border;
+  border-radius: $radius-xs;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &.done {
+    background: $color-success;
+    border-color: $color-success;
+  }
+}
+
+.checkIcon {
+  font-size: 28rpx;
+  color: $color-text-white;
+}
+
+.eventDetail {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+}
+
+// 图例
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx 24rpx;
+  padding: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  margin-top: $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.legendColor {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: $radius-xs;
+
+  &.vaccine { background: $color-cat-vaccine; }
+  &.deworming { background: $color-cat-deworming; }
+  &.grooming { background: $color-cat-grooming; }
+  &.checkup { background: $color-cat-checkup; }
+  &.neutering { background: $color-cat-neutering; }
+  &.special { background: $color-cat-special; }
+}
+
+.legendText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}

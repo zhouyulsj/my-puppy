@@ -1,0 +1,168 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: $color-bg-page;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollContent {
+  padding-bottom: 48rpx;
+}
+
+.notice {
+  padding: 12rpx $spacing-lg;
+  background: $color-bg-warm;
+  text-align: center;
+}
+
+.noticeText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.section {
+  padding: 0 $spacing-lg;
+  margin-top: $spacing-lg;
+}
+
+.sectionTitle {
+  display: block;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+// 风险卡片
+.riskCard {
+  position: relative;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: 24rpx 24rpx 24rpx 32rpx;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease backwards;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8rpx;
+  }
+
+  &.high::before { background: $color-risk-high; }
+  &.medium::before { background: $color-risk-medium; }
+  &.low::before { background: $color-risk-low; }
+}
+
+.riskHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.riskTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  flex: 1;
+}
+
+.riskBadge {
+  font-size: $font-size-xs;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-round;
+  white-space: nowrap;
+  margin-left: 16rpx;
+
+  &.high { background: rgba($color-risk-high, 0.1); color: $color-risk-high; }
+  &.medium { background: rgba($color-risk-medium, 0.1); color: $color-risk-medium; }
+  &.low { background: rgba($color-risk-low, 0.1); color: $color-risk-low; }
+}
+
+.riskDesc {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  margin-bottom: 8rpx;
+}
+
+.riskAction {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+}
+
+// 日常养护网格
+.careGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.careCard {
+  width: calc(50% - 8rpx);
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+  animation: fadeInUp 0.4s ease backwards;
+}
+
+.careHeader {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 12rpx;
+}
+
+.careIcon {
+  font-size: 36rpx;
+}
+
+.careTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.careItem {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  margin-bottom: 4rpx;
+}
+
+// 年龄注意横幅
+.ageBanner {
+  margin: $spacing-lg $spacing-lg 0;
+  background: $color-bg-blue-light;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  animation: fadeInUp 0.4s ease;
+}
+
+.ageTitle {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-secondary;
+  margin-bottom: 12rpx;
+}
+
+.ageNote {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  margin-bottom: 4rpx;
+}

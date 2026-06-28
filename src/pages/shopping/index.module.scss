@@ -1,0 +1,188 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: $color-bg-page;
+  display: flex;
+  flex-direction: column;
+}
+
+.notice {
+  padding: 12rpx $spacing-lg;
+  background: $color-bg-warm;
+  text-align: center;
+}
+
+.noticeText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.scrollContent {
+  padding: $spacing-md $spacing-lg 48rpx;
+}
+
+// 分类卡片
+.category {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease backwards;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  background: $color-bg-warm;
+}
+
+.categoryIcon {
+  font-size: 40rpx;
+  margin-right: 16rpx;
+}
+
+.categoryName {
+  flex: 1;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.categoryCount {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  background: $color-bg-card;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-round;
+}
+
+// 物品卡片
+.item {
+  padding: $spacing-md $spacing-lg;
+  border-top: 2rpx solid $color-divider;
+  transition: all $transition-base;
+
+  &.checked {
+    opacity: 0.55;
+  }
+
+  &:active {
+    background: $color-bg-hover;
+  }
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid $color-border;
+  border-radius: $radius-xs;
+  margin-right: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &.checked {
+    background: $color-primary;
+    border-color: $color-primary;
+  }
+}
+
+.checkIcon {
+  font-size: 28rpx;
+  color: $color-text-white;
+}
+
+.itemName {
+  flex: 1;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+
+  &.checked {
+    text-decoration: line-through;
+    color: $color-text-tertiary;
+  }
+}
+
+.importanceBadge {
+  font-size: $font-size-xs;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-round;
+  white-space: nowrap;
+  margin-left: 16rpx;
+
+  &.essential { background: rgba($color-importance-essential, 0.1); color: $color-importance-essential; }
+  &.recommended { background: rgba($color-importance-recommended, 0.1); color: $color-importance-recommended; }
+  &.optional { background: rgba($color-importance-optional, 0.1); color: $color-importance-optional; }
+}
+
+.itemGuide {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  margin-bottom: 12rpx;
+}
+
+.ingredientBox {
+  background: $color-bg-yellow-light;
+  border-radius: $radius-sm;
+  padding: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.ingredientLabel {
+  font-size: $font-size-xs;
+  color: $color-warning;
+  font-weight: $font-weight-medium;
+  margin-bottom: 4rpx;
+  display: block;
+}
+
+.ingredientText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+}
+
+.itemFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-price;
+}
+
+.guideBtn {
+  height: $button-height-sm;
+  padding: 0 24rpx;
+  background: rgba($color-primary, 0.1);
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    opacity: 0.85;
+    transform: scale(0.98);
+  }
+}
+
+.guideBtnText {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  white-space: nowrap;
+}

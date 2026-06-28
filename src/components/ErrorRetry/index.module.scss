@@ -1,0 +1,42 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 96rpx 32rpx;
+}
+
+.icon {
+  font-size: 88rpx;
+  margin-bottom: 24rpx;
+}
+
+.message {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  margin-bottom: 40rpx;
+  text-align: center;
+}
+
+.button {
+  height: $button-height-md;
+  padding: 0 64rpx;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.buttonText {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}

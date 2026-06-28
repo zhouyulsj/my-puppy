@@ -1,0 +1,81 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: $color-bg-page;
+  display: flex;
+  flex-direction: column;
+}
+
+.notice {
+  padding: 12rpx $spacing-lg;
+  background: $color-bg-warm;
+  text-align: center;
+}
+
+.noticeText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.scrollContent {
+  padding: $spacing-md $spacing-lg 48rpx;
+}
+
+.intro {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.introText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+}
+
+.itemCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease backwards;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+
+  &:active {
+    background: $color-bg-hover;
+  }
+}
+
+.itemIcon {
+  font-size: 40rpx;
+  margin-right: 16rpx;
+}
+
+.itemName {
+  flex: 1;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.arrow {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.guideWrap {
+  padding: 0 $spacing-lg $spacing-md;
+}

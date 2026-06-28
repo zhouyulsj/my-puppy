@@ -1,0 +1,192 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff3e8 0%, $color-bg-page 100%);
+  padding: 32rpx $spacing-lg 64rpx;
+  animation: fadeIn 0.4s ease;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  margin-bottom: 12rpx;
+}
+
+.subtitle {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: $line-height-loose;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: 40rpx 32rpx;
+  box-shadow: $shadow-card;
+}
+
+.field {
+  margin-bottom: 36rpx;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.label {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 16rpx;
+
+  .required {
+    color: $color-error;
+    margin-left: 4rpx;
+  }
+}
+
+.radioGroup {
+  display: flex;
+  gap: 24rpx;
+}
+
+.radioItem {
+  flex: 1;
+  height: $button-height-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-button;
+  transition: all $transition-base;
+
+  &.active {
+    background: rgba($color-primary, 0.1);
+    border-color: $color-primary;
+  }
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.radioText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+
+  &.active {
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.picker {
+  width: 100%;
+  height: $button-height-md;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-sm;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  &.error {
+    border-color: $color-error;
+  }
+}
+
+.pickerText {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+
+  &.placeholder {
+    color: $color-text-disabled;
+  }
+}
+
+.pickerArrow {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.input {
+  width: 100%;
+  height: $button-height-md;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-sm;
+  padding: 0 24rpx;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+
+  &.error {
+    border-color: $color-error;
+  }
+}
+
+.weightWrap {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.weightInput {
+  flex: 1;
+}
+
+.unit {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.errorMsg {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-error;
+  margin-top: 8rpx;
+}
+
+.submitBtn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  margin-top: 48rpx;
+  transition: all $transition-base;
+  box-shadow: 0 4rpx 16rpx rgba($color-primary, 0.3);
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.submitText {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+}
+
+.tip {
+  text-align: center;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 24rpx;
+  line-height: $line-height-loose;
+}

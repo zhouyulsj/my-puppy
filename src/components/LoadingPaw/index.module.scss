@@ -1,0 +1,32 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 96rpx 32rpx;
+  animation: fadeIn 0.4s ease;
+}
+
+.pawWrap {
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32rpx;
+}
+
+.paw {
+  font-size: 80rpx;
+  animation: pawSpin 1.2s linear infinite;
+  display: inline-block;
+}
+
+.text {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  text-align: center;
+  line-height: $line-height-loose;
+}

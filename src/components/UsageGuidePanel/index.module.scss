@@ -1,0 +1,40 @@
+@use '@/styles/variables.scss' as *;
+
+.panel {
+  margin-top: 16rpx;
+  padding: 24rpx;
+  background: $color-bg-blue-light;
+  border-radius: $radius-md;
+  animation: slideDown 0.3s ease;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.sectionTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-secondary;
+}
+
+.sectionText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+}
+
+.listItem {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+}
