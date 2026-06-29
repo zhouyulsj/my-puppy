@@ -6,6 +6,7 @@ import styles from './index.module.scss';
 import { usePetStore } from '@/store/petStore';
 import { getBreedInfo } from '@/data/breedDatabase';
 import { fetchShoppingData } from '@/services/ai';
+import { useUsageGuidesGenerator } from '@/hooks/useUsageGuidesGenerator';
 import { storage, STORAGE_KEYS } from '@/utils/storage';
 import type { ShoppingData } from '@/types/ai';
 import type { Importance } from '@/types/ai';
@@ -26,6 +27,9 @@ const ShoppingPage: React.FC = () => {
   const shoppingData = usePetStore((s) => s.shoppingData);
   const shoppingGenerated = usePetStore((s) => s.shoppingGenerated);
   const setShoppingData = usePetStore((s) => s.setShoppingData);
+
+  // 后台预生成所有使用指南（不阻塞 UI）
+  useUsageGuidesGenerator();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -65,7 +69,7 @@ const ShoppingPage: React.FC = () => {
     if (!pet) {
       Taro.redirectTo({ url: '/pages/profile/index' });
     }
-  }, [pet]);
+  }, [pet, shoppingData]);
 
   useDidShow(() => {
     if (pet && !shoppingGenerated && !loading) {

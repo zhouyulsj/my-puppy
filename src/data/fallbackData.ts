@@ -12,7 +12,7 @@ export const fallbackHealth: Record<PetSpecies, HealthData> = {
       { level: 'low', title: '口腔护理', description: '牙结石和口腔疾病在猫咪中常见。', action: '定期刷牙或使用洁齿零食' }
     ],
     daily_care: {
-      diet: ['选择符合AAFCO标准的猫粮', '保证每日充足饮水', '避免喂食人类食物(尤其洋葱、巧克力)'],
+      diet: ['选择符合中国GB标准(GB/T 31217-2014)的猫粮', '保证每日充足饮水', '避免喂食人类食物(尤其洋葱、巧克力)'],
       exercise: ['每日互动游戏15-30分钟', '提供猫爬架满足攀爬需求', '使用逗猫棒激发捕猎本能'],
       environment: ['提供安静私密的休息空间', '保持猫砂盆清洁(每日铲屎)', '提供抓板满足磨爪需求'],
       mental_health: ['每日陪伴互动', '提供玩具丰富环境', '避免长期独处造成焦虑']
@@ -27,7 +27,7 @@ export const fallbackHealth: Record<PetSpecies, HealthData> = {
       { level: 'low', title: '口腔护理', description: '牙结石和牙周病在犬只中常见。', action: '定期刷牙或使用洁齿骨' }
     ],
     daily_care: {
-      diet: ['选择符合AAFCO标准的犬粮', '按体型选择合适配方', '避免喂食葡萄、巧克力、葱蒜'],
+      diet: ['选择符合中国GB标准(GB/T 31216-2014)的犬粮', '按体型选择合适配方', '避免喂食葡萄、巧克力、葱蒜'],
       exercise: ['每日遛狗30-60分钟', '提供互动游戏时间', '大型犬需更大运动量'],
       environment: ['提供固定休息区域', '保持居住环境清洁', '提供充足玩具'],
       mental_health: ['每日陪伴训练', '社会化训练很重要', '避免长期独处导致分离焦虑']
@@ -42,7 +42,7 @@ export const fallbackShopping: Record<PetSpecies, ShoppingData> = {
       {
         name: '主粮', icon: '🍖',
         items: [
-          { name: '猫粮', selection_guide: '选择配料表首位为肉类、符合AAFCO标准的产品', ingredient_tips: '粗蛋白≥26%，粗脂肪≥9%，避免过多谷物', price_range: '80-300元/袋', importance: 'essential' }
+          { name: '猫粮', selection_guide: '选择配料表首位为肉类、符合中国GB标准(GB/T 31217-2014)的产品', ingredient_tips: '粗蛋白≥26%，粗脂肪≥9%，避免过多谷物', price_range: '80-300元/袋', importance: 'essential' }
         ]
       },
       {
@@ -79,7 +79,7 @@ export const fallbackShopping: Record<PetSpecies, ShoppingData> = {
       {
         name: '主粮', icon: '🍖',
         items: [
-          { name: '犬粮', selection_guide: '按体型选择配方，配料表首位应为肉类', ingredient_tips: '粗蛋白≥22%，粗脂肪≥5%，钙磷比1.2:1', price_range: '100-400元/袋', importance: 'essential' }
+          { name: '犬粮', selection_guide: '按体型选择配方，配料表首位应为肉类，符合中国GB标准(GB/T 31216-2014)', ingredient_tips: '粗蛋白≥22%，粗脂肪≥5%，钙磷比1.2:1', price_range: '100-400元/袋', importance: 'essential' }
         ]
       },
       {

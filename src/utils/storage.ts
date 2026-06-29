@@ -37,5 +37,6 @@ export const STORAGE_KEYS = {
   CALENDAR: 'furball_calendar',
   SHOPPING_CHECKED: 'furball_shopping_checked',
   CALENDAR_DONE: 'furball_calendar_done',
+  USAGE_GUIDES: 'furball_usage_guides',
   API_KEY: 'furball_api_key'
 } as const;

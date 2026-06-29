@@ -52,7 +52,7 @@ const HealthPage: React.FC = () => {
     }
   };
 
-  // 首次进入若无数据则生成
+  // 首次进入若无数据则生成；API Key 变更后 healthData 被清空也会重新触发
   useEffect(() => {
     if (pet && !healthData && !loading && !error) {
       generate();
@@ -60,7 +60,7 @@ const HealthPage: React.FC = () => {
     if (!pet) {
       Taro.redirectTo({ url: '/pages/profile/index' });
     }
-  }, [pet]);
+  }, [pet, healthData]);
 
   // 每次显示时若更换了宠物重新生成
   useDidShow(() => {

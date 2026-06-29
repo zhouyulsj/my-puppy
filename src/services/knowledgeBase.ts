@@ -9,6 +9,9 @@ const STOP_WORDS = new Set([
   '关于', '对于', '这个', '那个', '哪些', '哪种', '一些', '比较', '应该', '如果'
 ]);
 
+// 泛化词（单字"猫"/"狗"等不应作为反向匹配依据，否则"猫粮"会匹配到关键词"猫"）
+const GENERIC_KEYWORDS = new Set(['猫', '狗', '犬', '宠物', '动物']);
+
 // 分词：按非汉字/字母字符切分，并过滤停用词和过短词
 function tokenize(query: string): string[] {
   const tokens: string[] = [];
@@ -34,6 +37,22 @@ function tokenize(query: string): string[] {
   return [...tokens, ...extraTokens];
 }
 
+// 关键词匹配：k 包含 token 或 token 包含 k
+// 但对泛化词(猫/狗等)不做反向匹配(token.includes(k))，避免"猫粮"误匹配"猫"
+function keywordMatch(keywords: string[], token: string): boolean {
+  return keywords.some((k) => {
+    const kl = k.toLowerCase();
+    // 正向：关键词包含 token（如关键词"布偶猫"包含 token"布偶"）
+    if (kl.includes(token)) return true;
+    // 反向：token 包含关键词（如 token"猫粮配料"包含关键词"猫粮"）
+    // 但泛化词(猫/狗)不做反向匹配，否则任何含"猫"的 token 都会命中
+    if (GENERIC_KEYWORDS.has(kl)) return false;
+    // 反向匹配要求关键词至少2字，避免单字误匹配
+    if (kl.length < 2) return false;
+    return token.includes(kl);
+  });
+}
+
 // 检索知识库，返回按相关性排序的结果
 export function searchKnowledge(
   query: string,
@@ -49,6 +68,8 @@ export function searchKnowledge(
     if (options?.sourceFilter && entry.source !== options.sourceFilter) continue;
 
     let score = 0;
+    let titleHit = false;
+    let keywordHit = false;
     const titleLower = entry.title.toLowerCase();
     const contentLower = entry.content.toLowerCase();
 
@@ -56,10 +77,12 @@ export function searchKnowledge(
       // 标题命中权重高
       if (titleLower.includes(token)) {
         score += titleLower === token ? 10 : 5;
+        titleHit = true;
       }
       // 关键词命中
-      if (entry.keywords.some((k) => k.toLowerCase().includes(token) || token.includes(k.toLowerCase()))) {
+      if (keywordMatch(entry.keywords, token)) {
         score += 3;
+        keywordHit = true;
       }
       // 内容命中
       if (contentLower.includes(token)) {
@@ -67,7 +90,9 @@ export function searchKnowledge(
       }
     }
 
-    if (score > 0) {
+    // 最低分数阈值：需标题或关键词命中，且总分 >= 5
+    // 仅内容匹配(纯堆量)不足以纳入结果
+    if (score >= 5 && (titleHit || keywordHit)) {
       results.push({
         source: entry.source,
         source_label: entry.source_label,

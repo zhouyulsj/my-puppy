@@ -5,38 +5,18 @@ import classnames from 'classnames';
 import styles from './index.module.scss';
 import { usePetStore } from '@/store/petStore';
 import { getBreedInfo } from '@/data/breedDatabase';
-import type { PetSpecies } from '@/types/pet';
+import { commonItems } from '@/data/commonItems';
+import { useUsageGuidesGenerator } from '@/hooks/useUsageGuidesGenerator';
 import PetHeader from '@/components/PetHeader';
 import UsageGuidePanel from '@/components/UsageGuidePanel';
 import Disclaimer from '@/components/Disclaimer';
 
-// 常用物品列表（按种类区分）
-const commonItems: Record<PetSpecies, { name: string; icon: string }[]> = {
-  cat: [
-    { name: '猫粮', icon: '🍖' },
-    { name: '内驱药', icon: '💊' },
-    { name: '外驱药', icon: '💧' },
-    { name: '化毛膏', icon: '🧴' },
-    { name: '猫砂', icon: '🪨' },
-    { name: '逗猫棒', icon: '🪶' },
-    { name: '猫抓板', icon: '🪵' },
-    { name: '指甲剪', icon: '✂️' }
-  ],
-  dog: [
-    { name: '犬粮', icon: '🍖' },
-    { name: '内驱药', icon: '💊' },
-    { name: '外驱药', icon: '💧' },
-    { name: '洁齿骨', icon: '🦴' },
-    { name: '牵引绳', icon: '🪢' },
-    { name: '拾便袋', icon: '🛍️' },
-    { name: '犬窝', icon: '🛏️' },
-    { name: '指甲剪', icon: '✂️' }
-  ]
-};
-
 const GuidePage: React.FC = () => {
   const pet = usePetStore((s) => s.pet);
   const [openItem, setOpenItem] = useState<string | null>(null);
+
+  // 后台预生成所有使用指南（不阻塞 UI）
+  useUsageGuidesGenerator();
 
   if (!pet) {
     Taro.redirectTo({ url: '/pages/profile/index' });

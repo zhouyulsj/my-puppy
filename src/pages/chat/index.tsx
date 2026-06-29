@@ -5,6 +5,8 @@ import classnames from 'classnames';
 import styles from './index.module.scss';
 import { fetchChatAnswer } from '@/services/ai';
 import { getKnowledgeSources } from '@/services/knowledgeBase';
+import { usePetStore } from '@/store/petStore';
+import SettingsModal from '@/components/SettingsModal';
 import type { ChatMessage } from '@/types/chat';
 
 const QUICK_QUESTIONS = [
@@ -26,8 +28,11 @@ const ChatPage: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [inputKey, setInputKey] = useState(0); // 用于强制重置 Textarea
   const scrollViewRef = useRef<string>('');
 
+  const apiKey = usePetStore((s) => s.apiKey);
   const sources = getKnowledgeSources();
 
   // 滚动到底部
@@ -53,6 +58,7 @@ const ChatPage: React.FC = () => {
     };
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
+    setInputKey((k) => k + 1); // 强制 Textarea 重新挂载，确保清空
     setLoading(true);
 
     try {
@@ -92,6 +98,12 @@ const ChatPage: React.FC = () => {
         <View className={styles.headerTitle}>
           <Text className={styles.headerIcon}>💬</Text>
           <Text className={styles.headerText}>毛球AI问答</Text>
+          <View
+            className={styles.settingsBtn}
+            onClick={() => setSettingsOpen(true)}
+          >
+            <Text className={styles.settingsIcon}>{apiKey ? '⚙️' : '⚠️'}</Text>
+          </View>
         </View>
         <ScrollView scrollX className={styles.sourceBar} enhanced showScrollbar={false}>
           {sources.map((s) => (
@@ -100,7 +112,13 @@ const ChatPage: React.FC = () => {
             </View>
           ))}
         </ScrollView>
+        {!apiKey && (
+          <View className={styles.keyWarning} onClick={() => setSettingsOpen(true)}>
+            <Text className={styles.keyWarningText}>⚠️ 未配置API Key，点击此处设置智谱GLM Key后即可对话</Text>
+          </View>
+        )}
       </View>
+      <SettingsModal visible={settingsOpen} onClose={() => setSettingsOpen(false)} />
 
       {/* 消息列表 */}
       <ScrollView
@@ -194,6 +212,7 @@ const ChatPage: React.FC = () => {
       {/* 输入区 */}
       <View className={styles.inputBar}>
         <Textarea
+          key={`input-${inputKey}`}
           className={styles.input}
           value={input}
           onInput={(e) => setInput(e.detail.value)}

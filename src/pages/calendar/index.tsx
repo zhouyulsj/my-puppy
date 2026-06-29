@@ -79,7 +79,7 @@ const CalendarPage: React.FC = () => {
     if (!pet) {
       Taro.redirectTo({ url: '/pages/profile/index' });
     }
-  }, [pet]);
+  }, [pet, calendarData]);
 
   useDidShow(() => {
     if (pet && !calendarGenerated && !loading) {

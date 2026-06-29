@@ -29,6 +29,29 @@
   font-size: $font-size-lg;
   font-weight: $font-weight-semibold;
   color: $color-text-primary;
+  flex: 1;
+}
+
+.settingsBtn {
+  margin-left: auto;
+  padding: 4rpx 8rpx;
+}
+
+.settingsIcon {
+  font-size: $font-size-md;
+}
+
+.keyWarning {
+  margin-top: $spacing-xs;
+  background: rgba($color-warning, 0.1);
+  border-radius: $radius-sm;
+  padding: 8rpx 16rpx;
+}
+
+.keyWarningText {
+  font-size: $font-size-xs;
+  color: $color-warning;
+  line-height: $line-height-normal;
 }
 
 .sourceBar {
