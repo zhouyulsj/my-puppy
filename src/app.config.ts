@@ -4,7 +4,8 @@ export default defineAppConfig({
     'pages/health/index',
     'pages/shopping/index',
     'pages/guide/index',
-    'pages/calendar/index'
+    'pages/calendar/index',
+    'pages/chat/index'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -21,7 +22,8 @@ export default defineAppConfig({
       { pagePath: 'pages/health/index', text: '健康评估' },
       { pagePath: 'pages/shopping/index', text: '采购清单' },
       { pagePath: 'pages/guide/index', text: '使用指南' },
-      { pagePath: 'pages/calendar/index', text: '全年日历' }
+      { pagePath: 'pages/calendar/index', text: '全年日历' },
+      { pagePath: 'pages/chat/index', text: 'AI问答' }
     ]
   }
 })

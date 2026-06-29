@@ -76,24 +76,23 @@ export function getDietStageKey(species: string, ageMonths: number, size?: strin
   }
   // dog
   if (ageMonths < 12) {
-    if (size === '大型犬') return 'puppy_large';
+    if (size === '大型犬' || size === '巨型犬') return 'puppy_large';
     if (size === '中型犬') return 'puppy_medium';
     return 'puppy_small';
   }
   if (ageMonths < 96) {
-    if (size === '大型犬') return 'adult_dog_large';
+    if (size === '大型犬' || size === '巨型犬') return 'adult_dog_large';
     if (size === '中型犬') return 'adult_dog_medium';
     return 'adult_dog_small';
   }
   return 'senior_dog';
 }
 
-// 根据毛色获取洗护阶段key
+// 根据毛型获取洗护阶段key（长毛/双层毛归入长毛洗护，需更频繁梳毛）
 export function getGroomingKey(species: string, coatType: string): string {
+  const isLong = coatType === '长毛' || coatType === '双层毛';
   if (species === 'cat') {
-    if (coatType === '长毛') return 'long_hair_cat';
-    return 'short_hair_cat';
+    return isLong ? 'long_hair_cat' : 'short_hair_cat';
   }
-  if (coatType === '长毛') return 'long_hair_dog';
-  return 'short_hair_dog';
+  return isLong ? 'long_hair_dog' : 'short_hair_dog';
 }

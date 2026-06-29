@@ -1,0 +1,306 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: $color-bg-page;
+  display: flex;
+  flex-direction: column;
+}
+
+// 顶部
+.header {
+  background: $color-bg-card;
+  padding: $spacing-sm $spacing-lg;
+  border-bottom: 1rpx solid $color-border;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-xs;
+}
+
+.headerIcon {
+  font-size: $font-size-lg;
+  margin-right: $spacing-xs;
+}
+
+.headerText {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.sourceBar {
+  white-space: nowrap;
+}
+
+.sourceChip {
+  display: inline-block;
+  background: $color-bg-warm;
+  border-radius: $radius-round;
+  padding: 6rpx 20rpx;
+  margin-right: $spacing-xs;
+}
+
+.sourceChipText {
+  font-size: $font-size-xs;
+  color: $color-text-primary-brand;
+  white-space: nowrap;
+}
+
+// 消息列表
+.messageList {
+  flex: 1;
+  padding: $spacing-sm $spacing-lg;
+  overflow-y: auto;
+}
+
+// 空状态
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80rpx;
+}
+
+.emptyIcon {
+  font-size: 80rpx;
+  margin-bottom: $spacing-md;
+}
+
+.emptyTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.emptyDesc {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+  line-height: $line-height-normal;
+  margin-bottom: $spacing-xl;
+}
+
+.quickList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: 0 $spacing-md;
+}
+
+.quickChip {
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-round;
+  padding: 12rpx 28rpx;
+  margin-bottom: $spacing-xs;
+  transition: $transition-fast;
+
+  &:active {
+    background: $color-bg-hover;
+    border-color: $color-primary-light;
+  }
+}
+
+.quickChipText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+// 消息
+.message {
+  display: flex;
+  margin-bottom: $spacing-md;
+  animation: fadeInUp 0.3s ease backwards;
+
+  &.userMsg {
+    flex-direction: row-reverse;
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: $color-bg-warm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &.userAvatar {
+    background: $color-primary;
+  }
+}
+
+.avatarIcon {
+  font-size: 36rpx;
+}
+
+.bubbleWrap {
+  max-width: 78%;
+  margin: 0 $spacing-sm;
+  display: flex;
+  flex-direction: column;
+
+  .userMsg & {
+    align-items: flex-end;
+  }
+}
+
+.bubble {
+  padding: 20rpx 24rpx;
+  border-radius: $radius-md;
+  word-break: break-all;
+}
+
+.bubbleText {
+  font-size: $font-size-md;
+  line-height: $line-height-loose;
+  white-space: pre-wrap;
+}
+
+.userBubble {
+  background: $color-primary;
+  border-top-right-radius: $radius-xs;
+
+  .bubbleText {
+    color: $color-text-white;
+  }
+}
+
+.aiBubble {
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-top-left-radius: $radius-xs;
+  box-shadow: $shadow-card;
+
+  .bubbleText {
+    color: $color-text-primary;
+  }
+}
+
+// 参考来源
+.sources {
+  margin-top: $spacing-xs;
+  padding: 0 $spacing-xs;
+}
+
+.sourcesLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.sourceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-top: 6rpx;
+}
+
+.sourceTag {
+  background: $color-bg-blue-light;
+  border-radius: $radius-xs;
+  padding: 4rpx 14rpx;
+  max-width: 240rpx;
+
+  &:active {
+    opacity: 0.7;
+  }
+}
+
+.sourceTagText {
+  font-size: $font-size-xs;
+  color: $color-secondary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 加载态
+.loadingBubble {
+  display: flex;
+  align-items: center;
+}
+
+.loadingDots {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-right: 4rpx;
+}
+
+.loadingDot1, .loadingDot2, .loadingDot3 {
+  font-size: $font-size-lg;
+  color: $color-text-tertiary;
+  animation: blink 1.4s infinite both;
+}
+
+.loadingDot1 { animation-delay: 0.2s; }
+.loadingDot2 { animation-delay: 0.4s; }
+.loadingDot3 { animation-delay: 0.6s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.2; }
+  40% { opacity: 1; }
+}
+
+// 输入栏
+.inputBar {
+  display: flex;
+  align-items: flex-end;
+  padding: $spacing-sm $spacing-lg;
+  background: $color-bg-card;
+  border-top: 1rpx solid $color-border;
+  padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
+}
+
+.input {
+  flex: 1;
+  min-height: 72rpx;
+  max-height: 160rpx;
+  padding: 16rpx 24rpx;
+  background: $color-bg-page;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  line-height: $line-height-normal;
+  color: $color-text-primary;
+}
+
+.placeholder {
+  color: $color-text-disabled;
+}
+
+.sendBtn {
+  margin-left: $spacing-sm;
+  padding: 0 32rpx;
+  height: 72rpx;
+  border-radius: $radius-button;
+  background: $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition-fast;
+
+  &:active {
+    background: $color-primary-dark;
+  }
+
+  &.sendBtnDisabled {
+    background: $color-text-disabled;
+  }
+}
+
+.sendBtnText {
+  font-size: $font-size-md;
+  color: $color-text-white;
+  white-space: nowrap;
+}

@@ -4,6 +4,10 @@ node_modules/
 # 构建输出
 dist/
 
+# 编译缓存
+.swc/
+.taro-home/
+
 # Skill 临时资产
 .pai/
 

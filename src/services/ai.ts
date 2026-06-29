@@ -256,3 +256,90 @@ export async function fetchCalendarData(pet: PetProfile, breedInfo: BreedInfo): 
   console.warn('[AI] 全年日历使用 fallback 数据');
   return fallbackCalendar[pet.species];
 }
+
+// ============ AI 对话（带知识库检索） ============
+
+import type { ChatMessage, KnowledgeSnippet } from '@/types/chat';
+import { searchKnowledge } from '@/services/knowledgeBase';
+
+export interface ChatResult {
+  content: string;
+  sources: KnowledgeSnippet[];
+}
+
+// 调用 AI 对话，自动检索知识库作为上下文
+export async function fetchChatAnswer(
+  question: string,
+  history: ChatMessage[]
+): Promise<ChatResult> {
+  // 1. 检索相关知识
+  const snippets = searchKnowledge(question, { limit: 6 });
+
+  // 2. 构建知识上下文
+  const knowledgeContext = snippets.length > 0
+    ? snippets.map((s, i) =>
+        `【资料${i + 1}】来源：${s.source_label} | ${s.title}\n${s.content}`
+      ).join('\n\n')
+    : '（未检索到直接相关知识，请基于通用兽医知识回答）';
+
+  // 3. 构建 system prompt
+  const systemPrompt = `你是"毛球健康管家"的AI助手，拥有丰富宠物健康知识。回答时遵循：
+1. 优先基于下方"知识库资料"作答，资料来源需在回答末尾标注
+2. 回答简洁明了，用中文，适当使用要点式
+3. 涉及用药/医疗建议时，必须提醒"具体用药请遵兽医医嘱，本回答不能替代专业诊断"
+4. 如果知识库资料不足以完整回答，可补充通用知识，但需说明
+5. 回答控制在300字以内
+
+知识库资料：
+${knowledgeContext}`;
+
+  // 4. 构建对话历史（最近6轮）
+  const recentHistory = history.slice(-6);
+  const messages: { role: string; content: string }[] = [
+    { role: 'system', content: systemPrompt }
+  ];
+  for (const msg of recentHistory) {
+    messages.push({
+      role: msg.role === 'user' ? 'user' : 'assistant',
+      content: msg.content
+    });
+  }
+  messages.push({ role: 'user', content: question });
+
+  // 5. 调用 AI
+  if (!AI_CONFIG.apiKey) {
+    return {
+      content: '尚未配置AI Key，请在设置中填写智谱GLM的API Key后使用对话功能。',
+      sources: snippets
+    };
+  }
+
+  try {
+    const res = await Taro.request({
+      url: AI_CONFIG.apiUrl,
+      method: 'POST',
+      timeout: 20000,
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${AI_CONFIG.apiKey}`
+      },
+      data: {
+        model: AI_CONFIG.model,
+        messages,
+        temperature: 0.6,
+        max_tokens: 1500
+      }
+    });
+
+    if (res.statusCode !== 200) {
+      console.error('[AI Chat] 请求失败:', res.statusCode);
+      return { content: 'AI服务暂时不可用，请稍后重试。', sources: snippets };
+    }
+
+    const content = res.data?.choices?.[0]?.message?.content || '';
+    return { content: content.trim() || '未能获取回答，请重试。', sources: snippets };
+  } catch (e) {
+    console.error('[AI Chat] 调用异常:', e);
+    return { content: '网络异常，请检查网络后重试。', sources: snippets };
+  }
+}
